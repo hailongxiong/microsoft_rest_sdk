@@ -37,14 +37,15 @@ void CommandHandler::handle_get_or_post(http_request message)
     ucout << "Method: " << message.method() << std::endl;
     ucout << "URI: " << http::uri::decode(message.relative_uri().path()) << std::endl;
     ucout << "Query: " << http::uri::decode(message.relative_uri().query()) << std::endl << std::endl;
+    ucout << "Body: " << http::uri::decode(utility::string_t(U("Listening for requests at: "))) << std::endl << std::endl;
     message.reply(status_codes::OK, "ACCEPTED");
 };
 
-int main(int argc, char argv[])
+int main(int argc, char* argv[])
 {
     try
     {
-        utility::string_t address = U("http://*:8080");
+        utility::string_t address = U("http://192.168.0.3:8999");
         uri_builder uri(address);
         auto addr = uri.to_uri().to_string();
         CommandHandler handler(addr);
